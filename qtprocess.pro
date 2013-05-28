@@ -1,6 +1,12 @@
 TEMPLATE = lib
 TARGET = qtprocess
-QT += declarative
+
+contains(QT_VERSION, ^5\\..\\..*) {
+    DEFINES += QT5_BUILD
+    QT += qml
+} else {
+    QT += declarative
+}
 CONFIG += qt plugin
 
 TARGET = $$qtLibraryTarget($$TARGET)
@@ -31,6 +37,8 @@ symbian {
 } else:unix {
     maemo5 | !isEmpty(MEEGO_VERSION_MAJOR) {
         installPath = /usr/lib/qt4/imports/$$replace(uri, \\., /)
+    } else contains(QT_VERSION, ^5\\..\\..*) {
+        installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
     } else {
         installPath = $$[QT_INSTALL_IMPORTS]/$$replace(uri, \\., /)
     }
