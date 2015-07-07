@@ -1,4 +1,4 @@
-# qml-shell
+# qml-process
 
 A Qt plugin to run commands in a shell via QProcess based on qml-process-element-qt5.
 
