@@ -32,18 +32,23 @@ OTHER_FILES = qmldir
 }
 
 qmldir.files = qmldir
-symbian {
-    TARGET.EPOCALLOWDLLDATA = 1
-} else:unix {
-    maemo5 | !isEmpty(MEEGO_VERSION_MAJOR) {
-        installPath = /usr/lib/qt4/imports/$$replace(uri, \\., /)
-    } else contains(QT_VERSION, ^5\\..\\..*) {
-        installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
-    } else {
-        installPath = $$[QT_INSTALL_IMPORTS]/$$replace(uri, \\., /)
-    }
+# symbian {
+#     TARGET.EPOCALLOWDLLDATA = 1
+# } else:unix {
+#     maemo5 | !isEmpty(MEEGO_VERSION_MAJOR) {
+#         installPath = /usr/lib/qt4/imports/$$replace(uri, \\., /)
+#     } else contains(QT_VERSION, ^5\\..\\..*) {
+#         installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
+#     } else {
+#         installPath = $$[QT_INSTALL_IMPORTS]/$$replace(uri, \\., /)
+#     }
+#     qmldir.path = $$installPath
+#     target.path = $$installPath
+#     INSTALLS += target qmldir
+# }
+unix {
+    installPath = $$[QT_INSTALL_QML]/$$replace(uri, \\., /)
     qmldir.path = $$installPath
     target.path = $$installPath
     INSTALLS += target qmldir
 }
-

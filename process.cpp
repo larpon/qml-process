@@ -8,8 +8,10 @@ class Process::Private : public QProcess
 public:
     Private(Process *parent);
 
-    QString program;
-    QStringList arguments;
+    QString shell;
+    QString command;
+    //QString program;
+    //QStringList arguments;
 private:
     Process *q;
 };
@@ -28,12 +30,13 @@ Process::Process(QObject *parent)
     : QObject(parent)
     , d(new Private(this))
 {
+   d->shell = "bash";
 }
 
 Process::~Process()
 {
 }
-
+/*
 const QString &Process::program() const
 {
     return d->program;
@@ -57,10 +60,48 @@ void Process::setArguments(const QStringList &arguments)
     d->arguments = arguments;
     emit argumentsChanged(d->arguments);
 }
+*/
+
+const QString &Process::shell() const
+{
+    return d->shell;
+}
+
+void Process::setShell(const QString &shell)
+{
+    if (shell == d->shell) return;
+    d->shell = shell;
+    emit shellChanged(d->shell);
+}
+
+const QString &Process::command() const
+{
+    return d->command;
+}
+
+void Process::setCommand(const QString &command)
+{
+    if (command == d->command) return;
+    d->command = command;
+    emit commandChanged(d->command);
+}
 
 void Process::start()
 {
+    d->start(d->shell);
+    
+    d->write(d->command.toUtf8().constData());
+    d->closeWriteChannel();
+
+    //d->waitForStarted();
+    //d->waitForFinished();
+    
+    /*
+    sh.waitForFinished();
+    QByteArray output = sh.readAll();
+    sh.close();
     d->start(d->program, d->arguments);
+    */
 }
 
 void Process::terminate()
