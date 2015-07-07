@@ -1,22 +1,22 @@
-#include "process.h"
+#include "qml_process.h"
 
 #include <QtCore/QProcess>
 
-class Process::Private : public QProcess
+class QmlProcess::Private : public QProcess
 {
     Q_OBJECT
 public:
-    Private(Process *parent);
+    Private(QmlProcess *parent);
 
     QString shell;
     QString command;
     //QString program;
     //QStringList arguments;
 private:
-    Process *q;
+    QmlProcess *q;
 };
 
-Process::Private::Private(Process *parent)
+QmlProcess::Private::Private(QmlProcess *parent)
     : QProcess(parent)
     , q(parent)
 {
@@ -26,35 +26,35 @@ Process::Private::Private(Process *parent)
     connect(this, SIGNAL(readyReadStandardError()), q, SIGNAL(readyReadStandardError()));
 }
 
-Process::Process(QObject *parent)
+QmlProcess::QmlProcess(QObject *parent)
     : QObject(parent)
     , d(new Private(this))
 {
    d->shell = "bash";
 }
 
-Process::~Process()
+QmlProcess::~QmlProcess()
 {
 }
 /*
-const QString &Process::program() const
+const QString &QmlProcess::program() const
 {
     return d->program;
 }
 
-void Process::setProgram(const QString &program)
+void QmlProcess::setProgram(const QString &program)
 {
     if (program == d->program) return;
     d->program = program;
     emit programChanged(d->program);
 }
 
-const QStringList &Process::arguments() const
+const QStringList &QmlProcess::arguments() const
 {
     return d->arguments;
 }
 
-void Process::setArguments(const QStringList &arguments)
+void QmlProcess::setArguments(const QStringList &arguments)
 {
     if (arguments == d->arguments) return;
     d->arguments = arguments;
@@ -62,31 +62,31 @@ void Process::setArguments(const QStringList &arguments)
 }
 */
 
-const QString &Process::shell() const
+const QString &QmlProcess::shell() const
 {
     return d->shell;
 }
 
-void Process::setShell(const QString &shell)
+void QmlProcess::setShell(const QString &shell)
 {
     if (shell == d->shell) return;
     d->shell = shell;
     emit shellChanged(d->shell);
 }
 
-const QString &Process::command() const
+const QString &QmlProcess::command() const
 {
     return d->command;
 }
 
-void Process::setCommand(const QString &command)
+void QmlProcess::setCommand(const QString &command)
 {
     if (command == d->command) return;
     d->command = command;
     emit commandChanged(d->command);
 }
 
-void Process::start()
+void QmlProcess::start()
 {
     d->start(d->shell);
     
@@ -104,24 +104,24 @@ void Process::start()
     */
 }
 
-void Process::terminate()
+void QmlProcess::terminate()
 {
     d->terminate();
 }
 
-void Process::kill()
+void QmlProcess::kill()
 {
     d->kill();
 }
 
-QByteArray Process::readAllStandardError()
+QByteArray QmlProcess::readAllStandardError()
 {
     return d->readAllStandardError();
 }
 
-QByteArray Process::readAllStandardOutput()
+QByteArray QmlProcess::readAllStandardOutput()
 {
     return d->readAllStandardOutput();
 }
 
-#include "process.moc"
+#include "qml_process.moc"

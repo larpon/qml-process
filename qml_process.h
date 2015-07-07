@@ -1,20 +1,20 @@
-#ifndef PROCESS_H
-#define PROCESS_H
+#ifndef QMLPROCESS_H
+#define QMLPROCESS_H
 
 #include <QtCore/QObject>
 #include <QtCore/QStringList>
 
-class Process : public QObject
+class QmlProcess : public QObject
 {
     Q_OBJECT
-    Q_DISABLE_COPY(Process)
+    Q_DISABLE_COPY(QmlProcess)
     //Q_PROPERTY(QString program READ program WRITE setProgram NOTIFY programChanged)
     //Q_PROPERTY(QStringList arguments READ arguments WRITE setArguments NOTIFY argumentsChanged)
     Q_PROPERTY(QString shell READ shell WRITE setShell NOTIFY shellChanged)
     Q_PROPERTY(QString command READ command WRITE setCommand NOTIFY commandChanged)
 public:
-    Process(QObject *parent = 0);
-    ~Process();
+    QmlProcess(QObject *parent = 0);
+    ~QmlProcess();
 /*
     const QString &program() const;
     const QStringList &arguments() const;
@@ -53,5 +53,5 @@ private:
     Private *d;
 };
 
-#endif // PROCESS_H
+#endif // QMLPROCESS_H
 

@@ -1,11 +1,11 @@
-#ifndef QTPROCESS_PLUGIN_H
-#define QTPROCESS_PLUGIN_H
+#ifndef QML_PROCESS_PLUGIN_H
+#define QML_PROCESS_PLUGIN_H
 
 #ifdef QT5_BUILD
 
 #include <QtQml/QQmlExtensionPlugin>
 
-class QtProcessPlugin : public QQmlExtensionPlugin
+class QmlProcessPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
@@ -14,7 +14,7 @@ class QtProcessPlugin : public QQmlExtensionPlugin
 
 #include <QtDeclarative/QDeclarativeExtensionPlugin>
 
-class QtProcessPlugin : public QDeclarativeExtensionPlugin
+class QmlProcessPlugin : public QDeclarativeExtensionPlugin
 {
     Q_OBJECT
 
@@ -24,5 +24,4 @@ public:
     void registerTypes(const char *uri);
 };
 
-#endif // QTPROCESS_PLUGIN_H
-
+#endif // QML_PROCESS_PLUGIN_H

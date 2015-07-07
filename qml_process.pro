@@ -1,5 +1,5 @@
 TEMPLATE = lib
-TARGET = qtprocess
+TARGET = qmlprocess
 
 contains(QT_VERSION, ^5\\..\\..*) {
     DEFINES += QT5_BUILD
@@ -10,16 +10,16 @@ contains(QT_VERSION, ^5\\..\\..*) {
 CONFIG += qt plugin
 
 TARGET = $$qtLibraryTarget($$TARGET)
-uri = QtProcess
+uri = QmlProcess
 
 # Input
 SOURCES += \
-    qtprocess_plugin.cpp \
-    process.cpp
+    qml_process_plugin.cpp \
+    qml_process.cpp
 
 HEADERS += \
-    qtprocess_plugin.h \
-    process.h
+    qml_process_plugin.h \
+    qml_process.h
 
 OTHER_FILES = qmldir
 
